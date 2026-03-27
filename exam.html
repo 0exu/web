@@ -229,8 +229,8 @@
 
     <main class="content-section">
         <section id="exam" class="card">
-            <div class="section-num">CENTER</div>
-            <h2><i class="fas fa-graduation-cap" style="margin-right: 20px; color: var(--gold);"></i>Exam Center</h2>
+            <div class="section-num" id="page-section-num">CENTER</div>
+            <h2><i id="page-icon" class="fas fa-graduation-cap" style="margin-right: 20px; color: var(--gold);"></i><span id="page-title">Exam Center</span></h2>
             <div id="exam-container" style="min-height: 400px; display: flex; flex-direction: column; justify-content: center;">
                 
                 <!-- Authentication Screen -->
@@ -356,13 +356,35 @@
             const showRegister = document.getElementById('show-register');
             const showLogin = document.getElementById('show-login');
 
-            // Dynamic Profile & Logout Logic
+            // Dynamic Page Title & Mode Logic
+            const urlParams = new URLSearchParams(window.location.search);
+            const isAuthMode = urlParams.get('mode') === 'auth';
             const userSession = JSON.parse(sessionStorage.getItem('nexus_session'));
+            
+            const pageTitle = document.getElementById('page-title');
+            const pageIcon = document.getElementById('page-icon');
+            const pageSecNum = document.getElementById('page-section-num');
+
             if (userSession) {
+                // Logged in: Always show Student Profile/Center
+                pageTitle.innerText = "Student Hub";
+                pageIcon.className = "fas fa-user-shield";
+                pageSecNum.innerText = "NEXUS";
+                
                 authSection.style.display = 'none';
                 examStart.style.display = 'block';
                 document.getElementById('user-profile').style.display = 'inline-block';
                 document.getElementById('user-name-display').innerText = userSession.name.split(' ')[0].toUpperCase();
+            } else if (isAuthMode) {
+                // Coming from "LOGIN" on Home page
+                pageTitle.innerText = "Student Login";
+                pageIcon.className = "fas fa-sign-in-alt";
+                pageSecNum.innerText = "AUTH";
+            } else {
+                // Coming from "Exam Center" navigation
+                pageTitle.innerText = "Exam Center";
+                pageIcon.className = "fas fa-graduation-cap";
+                pageSecNum.innerText = "CENTER";
             }
 
             document.getElementById('logout-btn').onclick = (e) => {
