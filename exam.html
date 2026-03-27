@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexus Assessment | BWU Platinum Laboratory</title>
-    <!-- Premium Fonts -->
+    <!-- Premium Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
         :root {
@@ -214,54 +215,59 @@
     <header class="luxury-nav">
         <a href="index.html" class="logo">BWU</a>
         <nav class="nav-links">
-            <a href="index.html#home">Excellence</a>
-            <a href="index.html#timetable">Schedule</a>
-            <a href="index.html#registration">Admission</a>
-            <a href="exam.html">Nexus Assessment</a>
+            <a href="index.html#home"><i class="fas fa-home" style="margin-right: 8px;"></i>Home</a>
+            <a href="index.html#timetable"><i class="fas fa-calendar-alt" style="margin-right: 8px;"></i>Timetable</a>
+            <a href="index.html#registration"><i class="fas fa-user-plus" style="margin-right: 8px;"></i>Register</a>
+            <a href="exam.html"><i class="fas fa-edit" style="margin-right: 8px;"></i>Exam Center</a>
+            <span id="user-profile" style="margin-left: 30px; border-left: 1px solid rgba(197, 160, 89, 0.3); padding-left: 30px; display: none;">
+                <i class="fas fa-user-circle" style="color: var(--gold); margin-right: 8px;"></i>
+                <span id="user-name-display" style="font-size: 0.8rem; font-weight: 700; color: var(--gold);"></span>
+                <a href="#" id="logout-btn" style="margin-left: 15px; opacity: 0.5; font-size: 0.7rem;"><i class="fas fa-sign-out-alt"></i></a>
+            </span>
         </nav>
     </header>
 
     <main class="content-section">
         <section id="exam" class="card">
-            <div class="section-num">ASSESS</div>
-            <h2>Nexus Assessment</h2>
+            <div class="section-num">CENTER</div>
+            <h2><i class="fas fa-graduation-cap" style="margin-right: 20px; color: var(--gold);"></i>Exam Center</h2>
             <div id="exam-container" style="min-height: 400px; display: flex; flex-direction: column; justify-content: center;">
                 
                 <!-- Authentication Screen -->
                 <div id="exam-auth">
                     <div id="login-view">
-                        <h3 style="font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); margin-bottom: 30px;">Nexus Authentication</h3>
+                        <h3 style="font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); margin-bottom: 30px;">Login</h3>
                         <div class="form-group">
                             <input type="text" id="login-id" required placeholder=" ">
                             <label>STUDENT ID (BWU-BCC-25-XXX)</label>
                         </div>
                         <div class="form-group">
                             <input type="password" id="login-pass" required placeholder=" ">
-                            <label>ACCESS KEY</label>
+                            <label>PASSWORD</label>
                         </div>
-                        <button class="btn-luxury" id="login-btn">Authenticate</button>
+                        <button class="btn-luxury" id="login-btn">Login</button>
                         <p style="margin-top: 30px; font-size: 0.8rem; opacity: 0.6;">
-                            New Operative? <span id="show-register" style="color: var(--gold); cursor: pointer; text-decoration: underline;">Request Credentials</span>
+                            No Account? <span id="show-register" style="color: var(--gold); cursor: pointer; text-decoration: underline;">Create New Account</span>
                         </p>
                     </div>
 
                     <div id="register-view" style="display: none;">
-                        <h3 style="font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); margin-bottom: 30px;">Credential Registry</h3>
+                        <h3 style="font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); margin-bottom: 30px;">Register New Account</h3>
                         <div class="form-group">
                             <input type="text" id="reg-name" required placeholder=" ">
-                            <label>FULL LEGAL NAME</label>
+                            <label>FULL NAME</label>
                         </div>
                         <div class="form-group">
                             <input type="text" id="reg-id" required placeholder=" ">
-                            <label>ASSIGNED STUDENT ID (BWU-BCC-25-XXX)</label>
+                            <label>STUDENT ID (BWU-BCC-25-XXX)</label>
                         </div>
                         <div class="form-group">
                             <input type="password" id="reg-pass" required placeholder=" ">
-                            <label>GENERATE ACCESS KEY</label>
+                            <label>PASSWORD</label>
                         </div>
-                        <button class="btn-luxury" id="register-btn">Register Identity</button>
+                        <button class="btn-luxury" id="register-btn">Register</button>
                         <p style="margin-top: 30px; font-size: 0.8rem; opacity: 0.6;">
-                            Already Registered? <span id="show-login" style="color: var(--gold); cursor: pointer; text-decoration: underline;">Existing Auth</span>
+                            Already Have an Account? <span id="show-login" style="color: var(--gold); cursor: pointer; text-decoration: underline;">Login Here</span>
                         </p>
                     </div>
                 </div>
@@ -269,23 +275,23 @@
                 <!-- Start Screen (Hidden initially) -->
                 <div id="exam-start" style="display: none;">
                     <p style="margin-bottom: 30px; color: var(--gold-light); font-size: 1.2rem;">
-                        Welcome to the evaluation module. This assessment will validate your proficiency in the core pillars of the Platinum Laboratory.
+                        Welcome to the official Exam Center. Please read the instructions carefully before starting.
                     </p>
                     <div style="background: rgba(197, 160, 89, 0.05); padding: 30px; border-radius: 20px; border-left: 4px solid var(--gold); margin-bottom: 40px;">
                         <ul style="list-style: none; color: var(--ivory); opacity: 0.8;">
-                            <li>• 40 High-Intelligence Questions</li>
-                            <li>• 20:00 Time Limit</li>
-                            <li>• Results mapped to Nexus Registry</li>
+                            <li>• 40 Questions total</li>
+                            <li>• 20 Minutes time limit</li>
+                            <li>• Final score shown instantly</li>
                         </ul>
                     </div>
-                    <button class="btn-luxury" id="start-exam-btn">Initialize Assessment</button>
+                    <button class="btn-luxury" id="start-exam-btn">Start Exam</button>
                 </div>
 
                 <!-- Quiz Screen -->
                 <div id="exam-quiz" style="display: none;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
-                        <span id="question-count" style="color: var(--gold); font-weight: 600; letter-spacing: 2px;">SEC 01 / Q 1</span>
-                        <span id="exam-timer">05:00</span>
+                        <span id="question-count" style="color: var(--gold); font-weight: 600; letter-spacing: 2px;">QUESTION 1 / 40</span>
+                        <span id="exam-timer">20:00</span>
                     </div>
                     <div id="question-text" style="font-size: 1.8rem; margin-bottom: 40px; font-family: 'Playfair Display', serif; color: var(--ivory);">
                         <!-- Question injected here -->
@@ -294,22 +300,22 @@
                         <!-- Options injected here -->
                     </div>
                     <div style="margin-top: 50px; display: flex; justify-content: space-between; border-top: 1px solid rgba(197, 160, 89, 0.1); padding-top: 30px;">
-                        <button class="btn-luxury" style="padding: 15px 40px; font-size: 0.7rem;" id="prev-btn">Retrace</button>
-                        <button class="btn-luxury" style="padding: 15px 40px; font-size: 0.7rem;" id="next-btn">Advance</button>
+                        <button class="btn-luxury" style="padding: 15px 40px; font-size: 0.7rem;" id="prev-btn">Previous</button>
+                        <button class="btn-luxury" style="padding: 15px 40px; font-size: 0.7rem;" id="next-btn">Next</button>
                     </div>
                 </div>
 
                 <!-- Result Screen -->
                 <div id="exam-result" style="display: none; text-align: center;">
-                    <div class="section-num" style="position: relative; top: 0; right: 0; font-size: 4rem; margin-bottom: 20px;">RANK</div>
-                    <h3 id="result-title" style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--gold); margin-bottom: 10px;">Evaluation Complete</h3>
-                    <p id="score-display" style="font-size: 3rem; color: var(--ivory); font-weight: 700; margin-bottom: 40px;">80%</p>
+                    <div class="section-num" style="position: relative; top: 0; right: 0; font-size: 4rem; margin-bottom: 20px;">RESULT</div>
+                    <h3 id="result-title" style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--gold); margin-bottom: 10px;">Exam Completed</h3>
+                    <p id="score-display" style="font-size: 3rem; color: var(--ivory); font-weight: 700; margin-bottom: 40px;">0 / 40</p>
                     <p id="result-feedback" style="max-width: 500px; margin: 0 auto 40px; color: var(--gold-light); opacity: 0.8;">
-                        Your intelligence profile has been updated within the Nexus registry.
+                        Your results have been recorded in the database.
                     </p>
                     <div style="display: flex; gap: 20px; justify-content: center;">
-                        <button class="btn-luxury" id="retry-exam-btn">Re-Initialize</button>
-                        <a href="index.html" class="btn-luxury" style="background: transparent; border: 1px solid var(--gold); color: var(--gold);">Return Home</a>
+                        <button class="btn-luxury" id="retry-exam-btn">Try Again</button>
+                        <a href="index.html" class="btn-luxury" style="background: transparent; border: 1px solid var(--gold); color: var(--gold);">Home</a>
                     </div>
                 </div>
             </div>
@@ -349,6 +355,21 @@
             
             const showRegister = document.getElementById('show-register');
             const showLogin = document.getElementById('show-login');
+
+            // Dynamic Profile & Logout Logic
+            const userSession = JSON.parse(sessionStorage.getItem('nexus_session'));
+            if (userSession) {
+                authSection.style.display = 'none';
+                examStart.style.display = 'block';
+                document.getElementById('user-profile').style.display = 'inline-block';
+                document.getElementById('user-name-display').innerText = userSession.name.split(' ')[0].toUpperCase();
+            }
+
+            document.getElementById('logout-btn').onclick = (e) => {
+                e.preventDefault();
+                sessionStorage.removeItem('nexus_session');
+                window.location.reload();
+            };
             
             showRegister.onclick = () => {
                 loginView.style.opacity = '0';
@@ -388,38 +409,52 @@
                     return;
                 }
                 if (pass.length < 6) {
-                    alert('Access key must be at least 6 characters.');
+                    alert('Password must be at least 6 characters.');
                     return;
                 }
 
                 const users = JSON.parse(localStorage.getItem('nexus_users') || '[]');
                 if (users.find(u => u.studentID === studentID)) {
-                    alert('This Student ID is already registered in the Nexus.');
+                    alert('This Student ID is already registered.');
                     return;
                 }
 
                 users.push({ name, studentID, pass });
                 localStorage.setItem('nexus_users', JSON.stringify(users));
-                alert('Identity Registered. Proceed to Authentication.');
+                alert('Account Created. Please Login.');
                 showLogin.click();
             };
 
             // Login Logic
+            const loginIdInput = document.getElementById('login-id');
+            const loginPassInput = document.getElementById('login-pass');
+            
+            const triggerLogin = (e) => { if (e.key === 'Enter') document.getElementById('login-btn').click(); };
+            loginIdInput.addEventListener('keypress', triggerLogin);
+            loginPassInput.addEventListener('keypress', triggerLogin);
+
             document.getElementById('login-btn').onclick = () => {
-                const studentID = document.getElementById('login-id').value.trim().toUpperCase();
-                const pass = document.getElementById('login-pass').value;
+                const studentID = loginIdInput.value.trim().toUpperCase();
+                const pass = loginPassInput.value;
 
                 const users = JSON.parse(localStorage.getItem('nexus_users') || '[]');
                 const user = users.find(u => u.studentID === studentID && u.pass === pass);
 
                 if (user) {
-                    authSection.style.display = 'none';
-                    examStart.style.display = 'block';
                     sessionStorage.setItem('nexus_session', JSON.stringify(user));
+                    window.location.reload(); // Reload to activate profile view
                 } else {
-                    alert('Authentication failed. Invalid Student ID or Access Key.');
+                    alert('Login failed. Check your ID and Password.');
                 }
             };
+
+            // Register Enter Key Support
+            const regInputs = ['reg-name', 'reg-id', 'reg-pass'];
+            regInputs.forEach(id => {
+                document.getElementById(id).addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') document.getElementById('register-btn').click();
+                });
+            });
 
             // 3. Nexus Exam Portal Logic
             const examData = [
