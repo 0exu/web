@@ -35,6 +35,23 @@
             flex-direction: column;
         }
 
+        /* --- Elegant Preloader --- */
+        #preloader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--navy);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 9999; transition: opacity 1s ease;
+        }
+        .loader-ring {
+            width: 80px; height: 80px;
+            border: 2px solid var(--gold);
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
         /* --- Custom Luxury Cursor --- */
         #cursor {
             position: fixed;
@@ -94,6 +111,12 @@
             position: relative;
             overflow: hidden;
             box-shadow: 0 40px 80px rgba(0,0,0,0.3);
+            animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .section-num {
@@ -103,6 +126,23 @@
         }
 
         h2 { font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 30px; color: var(--gold); }
+
+        /* --- Interactive Form --- */
+        .form-group { position: relative; margin-bottom: 40px; }
+        .form-group input {
+            width: 100%; background: transparent; border: none;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.3);
+            padding: 15px 0; color: var(--ivory); font-size: 1.1rem;
+            transition: var(--transition);
+        }
+        .form-group input:focus { outline: none; border-bottom-color: var(--gold); }
+        .form-group label {
+            position: absolute; top: 15px; left: 0; color: rgba(197, 160, 89, 0.5);
+            transition: 0.3s ease; pointer-events: none; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;
+        }
+        .form-group input:focus ~ label, .form-group input:not(:placeholder-shown) ~ label {
+            top: -20px; font-size: 0.7rem; color: var(--gold); letter-spacing: 2px;
+        }
 
         /* --- Exam Portal Styles --- */
         .option-btn {
@@ -167,6 +207,7 @@
 </head>
 <body>
 
+    <div id="preloader"><div class="loader-ring"></div></div>
     <div id="cursor"></div>
     <div id="cursor-follower"></div>
 
@@ -186,8 +227,47 @@
             <h2>Nexus Assessment</h2>
             <div id="exam-container" style="min-height: 400px; display: flex; flex-direction: column; justify-content: center;">
                 
-                <!-- Start Screen -->
-                <div id="exam-start">
+                <!-- Authentication Screen -->
+                <div id="exam-auth">
+                    <div id="login-view">
+                        <h3 style="font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); margin-bottom: 30px;">Nexus Authentication</h3>
+                        <div class="form-group">
+                            <input type="text" id="login-id" required placeholder=" ">
+                            <label>STUDENT ID (BWU-BCC-25-XXX)</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="login-pass" required placeholder=" ">
+                            <label>ACCESS KEY</label>
+                        </div>
+                        <button class="btn-luxury" id="login-btn">Authenticate</button>
+                        <p style="margin-top: 30px; font-size: 0.8rem; opacity: 0.6;">
+                            New Operative? <span id="show-register" style="color: var(--gold); cursor: pointer; text-decoration: underline;">Request Credentials</span>
+                        </p>
+                    </div>
+
+                    <div id="register-view" style="display: none;">
+                        <h3 style="font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); margin-bottom: 30px;">Credential Registry</h3>
+                        <div class="form-group">
+                            <input type="text" id="reg-name" required placeholder=" ">
+                            <label>FULL LEGAL NAME</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="reg-id" required placeholder=" ">
+                            <label>ASSIGNED STUDENT ID (BWU-BCC-25-XXX)</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="reg-pass" required placeholder=" ">
+                            <label>GENERATE ACCESS KEY</label>
+                        </div>
+                        <button class="btn-luxury" id="register-btn">Register Identity</button>
+                        <p style="margin-top: 30px; font-size: 0.8rem; opacity: 0.6;">
+                            Already Registered? <span id="show-login" style="color: var(--gold); cursor: pointer; text-decoration: underline;">Existing Auth</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Start Screen (Hidden initially) -->
+                <div id="exam-start" style="display: none;">
                     <p style="margin-bottom: 30px; color: var(--gold-light); font-size: 1.2rem;">
                         Welcome to the evaluation module. This assessment will validate your proficiency in the core pillars of the Platinum Laboratory.
                     </p>
@@ -243,7 +323,16 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Premium Custom Cursor
+            // 0. Luxury Preloader
+            window.onload = () => {
+                const loader = document.getElementById('preloader');
+                if (loader) {
+                    loader.style.opacity = '0';
+                    setTimeout(() => loader.style.display = 'none', 1000);
+                }
+            };
+
+            // 1. Premium Custom Cursor
             const cursor = document.getElementById('cursor');
             const follower = document.getElementById('cursor-follower');
             
@@ -252,7 +341,87 @@
                 follower.style.transform = `translate3d(${e.clientX - 16}px, ${e.clientY - 16}px, 0)`;
             });
 
-            // Nexus Exam Portal Logic
+            // 2. Auth & Navigation Logic
+            const authSection = document.getElementById('exam-auth');
+            const loginView = document.getElementById('login-view');
+            const registerView = document.getElementById('register-view');
+            const examStart = document.getElementById('exam-start');
+            
+            const showRegister = document.getElementById('show-register');
+            const showLogin = document.getElementById('show-login');
+            
+            showRegister.onclick = () => {
+                loginView.style.opacity = '0';
+                setTimeout(() => {
+                    loginView.style.display = 'none';
+                    registerView.style.display = 'block';
+                    registerView.style.opacity = '1';
+                }, 300);
+            };
+            
+            showLogin.onclick = () => {
+                registerView.style.opacity = '0';
+                setTimeout(() => {
+                    registerView.style.display = 'none';
+                    loginView.style.display = 'block';
+                    loginView.style.opacity = '1';
+                }, 300);
+            };
+
+            // Security Validation: Enforce BWU-BCC-25-XXX format
+            function isValidStudentID(id) {
+                return /^BWU-BCC-25-\d{3}$/i.test(id);
+            }
+
+            // Register Logic
+            document.getElementById('register-btn').onclick = () => {
+                const name = document.getElementById('reg-name').value.trim();
+                const studentID = document.getElementById('reg-id').value.trim().toUpperCase();
+                const pass = document.getElementById('reg-pass').value;
+
+                if (!name || !studentID || !pass) {
+                    alert('All identity parameters are required.');
+                    return;
+                }
+                if (!isValidStudentID(studentID)) {
+                    alert('Invalid Student ID format. Use BWU-BCC-25-XXX (e.g., BWU-BCC-25-006)');
+                    return;
+                }
+                if (pass.length < 6) {
+                    alert('Access key must be at least 6 characters.');
+                    return;
+                }
+
+                const users = JSON.parse(localStorage.getItem('nexus_users') || '[]');
+                if (users.find(u => u.studentID === studentID)) {
+                    alert('This Student ID is already registered in the Nexus.');
+                    return;
+                }
+
+                users.push({ name, studentID, pass });
+                localStorage.setItem('nexus_users', JSON.stringify(users));
+                alert('Identity Registered. Proceed to Authentication.');
+                showLogin.click();
+            };
+
+            // Login Logic
+            document.getElementById('login-btn').onclick = () => {
+                const studentID = document.getElementById('login-id').value.trim().toUpperCase();
+                const pass = document.getElementById('login-pass').value;
+
+                const users = JSON.parse(localStorage.getItem('nexus_users') || '[]');
+                const user = users.find(u => u.studentID === studentID && u.pass === pass);
+
+                if (user) {
+                    authSection.style.display = 'none';
+                    examStart.style.display = 'block';
+                    sessionStorage.setItem('nexus_session', JSON.stringify(user));
+                } else {
+                    alert('Authentication failed. Invalid Student ID or Access Key.');
+                }
+            };
+
+            // 3. Nexus Exam Portal Logic
             const examData = [
                 { q: "What defines the 'Art of Styling' in the Nexus methodology?", o: ["Atomic control over elements", "Global styling only", "Random color application", "Standardization without design"], a: 0 },
                 { q: "In the Academic Matrix, which cycle is dedicated to Cyber Arch.?", o: ["MARS", "SATURN", "LUNA", "JUPITER"], a: 2 },
@@ -352,6 +521,9 @@
                 quizScreen.style.display = 'none';
                 resultScreen.style.display = 'block';
                 
+                const session = JSON.parse(sessionStorage.getItem('nexus_session') || '{}');
+                const userName = session.name || 'Operative';
+
                 let score = 0;
                 userAnswers.forEach((ans, idx) => {
                     if (ans === examData[idx].a) score++;
@@ -361,14 +533,18 @@
                 document.getElementById('score-display').innerText = `${score} / ${examData.length}`;
                 
                 const feedback = document.getElementById('result-feedback');
-                if (percentage >= 80) feedback.innerText = `Exceptional. You achieved ${percentage}%. Your intelligence profile is elite.`;
-                else if (percentage >= 50) feedback.innerText = `Competent. You achieved ${percentage}%. Your Nexus standing is validated.`;
-                else feedback.innerText = `Standard. You achieved ${percentage}%. Further calibration is required within the Laboratory.`;
+                if (percentage >= 80) feedback.innerText = `Exceptional work, ${userName}. You achieved ${percentage}%. Your intelligence profile is elite.`;
+                else if (percentage >= 50) feedback.innerText = `Competent, ${userName}. You achieved ${percentage}%. Your Nexus standing is validated.`;
+                else feedback.innerText = `Standard standing, ${userName}. You achieved ${percentage}%. Further calibration is required within the Laboratory.`;
             }
 
             startBtn.onclick = () => {
                 startScreen.style.display = 'none';
                 quizScreen.style.display = 'block';
+                // Reset timer and score just in case
+                timeLeft = 1200;
+                userAnswers.fill(null);
+                currentQuestion = 0;
                 startTimer();
                 updateExamUI();
             };
