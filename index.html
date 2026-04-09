@@ -246,6 +246,7 @@
             <span id="user-profile" style="margin-left: 30px; border-left: 1px solid rgba(197, 160, 89, 0.3); padding-left: 30px; display: none;">
                 <i class="fas fa-user-circle" style="color: var(--gold); margin-right: 8px;"></i>
                 <span id="user-name-display" style="font-size: 0.8rem; font-weight: 700; color: var(--gold);"></span>
+                <a href="dashboard.html" style="margin-left: 15px; opacity: 0.7; font-size: 0.8rem;" title="Dashboard"><i class="fas fa-th-large"></i></a>
                 <a href="#" id="logout-btn" style="margin-left: 15px; opacity: 0.5; font-size: 0.7rem;"><i class="fas fa-sign-out-alt"></i></a>
             </span>
         </nav>
@@ -346,8 +347,11 @@
             <section id="multimedia" class="card reveal">
                 <div class="section-num">04</div>
                 <h2>Visionary Insights</h2>
-                <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/9LwacpywVhs?si=6VN61VzLe_H2x6lo" allowfullscreen></iframe>
+                <div class="video-wrapper" style="background: #000;">
+                    <video controls style="width: 100%; border-radius: 30px;">
+                        <source src="bwu-intro-video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
             </section>
 
@@ -425,7 +429,7 @@
             document.getElementById('logout-btn').onclick = (e) => {
                 e.preventDefault();
                 sessionStorage.removeItem('nexus_session');
-                window.location.reload();
+                window.location.href = 'exam.html';
             };
 
             // 5. Form Interaction

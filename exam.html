@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus Assessment | BWU Platinum Laboratory</title>
+    <title>Nexus Portal | BWU Platinum Laboratory</title>
     <!-- Premium Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -99,7 +99,7 @@
         /* --- Content Container --- */
         .content-section {
             padding: 150px 20px 100px;
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             flex-grow: 1;
             width: 100%;
@@ -128,24 +128,214 @@
 
         h2 { font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 30px; color: var(--gold); }
 
-        /* --- Interactive Form --- */
-        .form-group { position: relative; margin-bottom: 40px; }
-        .form-group input {
-            width: 100%; background: transparent; border: none;
-            border-bottom: 1px solid rgba(197, 160, 89, 0.3);
-            padding: 15px 0; color: var(--ivory); font-size: 1.1rem;
-            transition: var(--transition);
+        /* --- Custom Styles --- */
+        .img-btn {
+            border: none;
+            border-radius: 5px;
+            color: white;
+            padding: 12px 25px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
         }
-        .form-group input:focus { outline: none; border-bottom-color: var(--gold); }
-        .form-group label {
-            position: absolute; top: 15px; left: 0; color: rgba(197, 160, 89, 0.5);
-            transition: 0.3s ease; pointer-events: none; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;
+        .img-btn:hover { transform: translateY(-2px); filter: brightness(1.2); }
+        .img-btn i { font-size: 1rem; }
+
+        #portal-sidebar {
+            width: 280px;
+            background: #0a192f;
+            border-right: 1px solid rgba(197, 160, 89, 0.1);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
         }
-        .form-group input:focus ~ label, .form-group input:not(:placeholder-shown) ~ label {
-            top: -20px; font-size: 0.7rem; color: var(--gold); letter-spacing: 2px;
+        .side-item {
+            padding: 12px 20px;
+            font-size: 0.75rem;
+            color: var(--ivory);
+            opacity: 0.7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            margin-bottom: 5px;
+        }
+        .side-item:hover, .side-item.active {
+            opacity: 1;
+            background: rgba(197, 160, 89, 0.1);
+            color: var(--gold);
+        }
+        .side-item[style*="color: #ef4444"]:hover {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+        .side-item i { width: 15px; text-align: center; }
+
+        .status-card {
+            background: var(--navy-light);
+            border-radius: 15px;
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 160px;
+        }
+        .card-footer {
+            margin-top: auto;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 10px;
+            font-size: 0.65rem;
+            color: var(--gold);
+            cursor: pointer;
+        }
+        
+        .portal-box {
+            background: var(--navy-light);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(197, 160, 89, 0.1);
+        }
+        .box-title {
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+        }
+        .notice-row {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
         }
 
-        /* --- Exam Portal Styles --- */
+        .luxury-table {
+            width: 100%; border-collapse: separate; border-spacing: 0 10px;
+        }
+        .luxury-table th {
+            text-align: left; padding: 20px; color: var(--gold);
+            text-transform: uppercase; font-size: 0.7rem; letter-spacing: 2px;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+        }
+        .luxury-table td {
+            background: rgba(255, 255, 255, 0.03); padding: 15px;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .auth-tab {
+            background: transparent;
+            border: 2px solid rgba(197, 160, 89, 0.3);
+            color: var(--ivory);
+            padding: 14px 35px;
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .auth-tab:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        .auth-tab.active {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--navy);
+        }
+        .auth-tab i { font-size: 0.9rem; }
+
+        .form-group { position: relative; margin-bottom: 35px; }
+        .form-group input {
+            width: 100%; 
+            background: rgba(255, 255, 255, 0.03); 
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            border-radius: 12px;
+            padding: 18px 20px 18px 45px; 
+            color: var(--ivory); 
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+        .form-group input:focus { 
+            outline: none; 
+            border-color: var(--gold);
+            background: rgba(197, 160, 89, 0.05);
+            box-shadow: 0 0 20px rgba(197, 160, 89, 0.1);
+        }
+        .form-group label {
+            position: absolute; 
+            top: 18px; 
+            left: 45px; 
+            color: rgba(197, 160, 89, 0.5);
+            transition: 0.3s ease; 
+            pointer-events: none; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .form-group input:focus ~ label, .form-group input:not(:placeholder-shown) ~ label {
+            top: -10px; 
+            left: 15px; 
+            font-size: 0.65rem; 
+            color: var(--gold); 
+            letter-spacing: 1px;
+            background: var(--navy-light);
+            padding: 2px 10px;
+            border-radius: 20px;
+        }
+        .form-group label i { margin-right: 5px; }
+
+        .link-text {
+            color: var(--gold);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .link-text:hover {
+            color: var(--gold-light);
+            text-decoration: underline;
+        }
+
+        .btn-luxury {
+            background: linear-gradient(135deg, var(--gold) 0%, #d4a84a 100%); 
+            color: var(--navy);
+            padding: 18px 45px; 
+            border-radius: 50px;
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 2px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: none; 
+            cursor: pointer;
+            transition: all 0.4s ease;
+            font-size: 0.85rem;
+            box-shadow: 0 10px 30px rgba(197, 160, 89, 0.3);
+        }
+        .btn-luxury:hover { 
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+            transform: translateY(-3px); 
+            box-shadow: 0 15px 40px rgba(197, 160, 89, 0.4);
+        }
+        .btn-luxury i { font-size: 0.9rem; }
+
         .option-btn {
             width: 100%;
             background: rgba(255, 255, 255, 0.03);
@@ -174,35 +364,21 @@
         #exam-timer {
             font-variant-numeric: tabular-nums;
             background: rgba(197, 160, 89, 0.1);
-            padding: 5px 15px;
+            padding: 8px 20px;
             border-radius: 50px;
             border: 1px solid var(--gold);
             font-weight: 700;
             color: var(--gold);
+            font-size: 1.1rem;
         }
-
-        .btn-luxury {
-            background: var(--gold); color: var(--navy);
-            padding: 20px 50px; border-radius: 100px;
-            font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
-            display: inline-block; border: none; cursor: none;
-            transition: var(--transition); position: relative;
-            overflow: hidden;
-            text-decoration: none;
-        }
-        .btn-luxury:hover { background: var(--ivory); transform: translateY(-5px); box-shadow: 0 20px 40px rgba(197, 160, 89, 0.3); }
-
-        footer {
-            padding: 60px 0; text-align: center; border-top: 1px solid rgba(197, 160, 89, 0.1);
-            background: #050c18;
-        }
-        .footer-logo { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); margin-bottom: 10px; }
 
         @media (max-width: 768px) {
             .card { padding: 40px 20px; }
             h2 { font-size: 2rem; }
             .luxury-nav { padding: 15px 20px; }
             .nav-links { display: none; }
+            #portal-view { flex-direction: column; height: auto !important; }
+            #portal-sidebar { width: 100%; height: auto !important; }
         }
     </style>
 </head>
@@ -218,87 +394,100 @@
             <a href="index.html#home"><i class="fas fa-home" style="margin-right: 8px;"></i>Home</a>
             <a href="index.html#timetable"><i class="fas fa-calendar-alt" style="margin-right: 8px;"></i>Timetable</a>
             <a href="index.html#registration"><i class="fas fa-user-plus" style="margin-right: 8px;"></i>Register</a>
+            <a href="dashboard.html"><i class="fas fa-desktop" style="margin-right: 8px;"></i>Dashboard</a>
             <a href="exam.html"><i class="fas fa-edit" style="margin-right: 8px;"></i>Exam Center</a>
-            <span id="user-profile" style="margin-left: 30px; border-left: 1px solid rgba(197, 160, 89, 0.3); padding-left: 30px; display: none;">
-                <i class="fas fa-user-circle" style="color: var(--gold); margin-right: 8px;"></i>
-                <span id="user-name-display" style="font-size: 0.8rem; font-weight: 700; color: var(--gold);"></span>
-                <a href="#" id="logout-btn" style="margin-left: 15px; opacity: 0.5; font-size: 0.7rem;"><i class="fas fa-sign-out-alt"></i></a>
-            </span>
         </nav>
     </header>
 
     <main class="content-section">
-        <section id="exam" class="card">
+        <section id="student-portal" class="card">
             <div class="section-num" id="page-section-num">CENTER</div>
             <h2><i id="page-icon" class="fas fa-graduation-cap" style="margin-right: 20px; color: var(--gold);"></i><span id="page-title">Exam Center</span></h2>
-            <div id="exam-container" style="min-height: 400px; display: flex; flex-direction: column; justify-content: center;">
+            
+            <div id="portal-container" style="min-height: 400px;">
                 
                 <!-- Authentication Screen -->
                 <div id="exam-auth">
-                    <div id="login-view">
-                        <h3 style="font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); margin-bottom: 30px;">Login</h3>
+                    <!-- Tab Buttons -->
+                    <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 40px;">
+                        <button id="tab-login" class="auth-tab active" onclick="switchAuthTab('login')">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </button>
+                        <button id="tab-register" class="auth-tab" onclick="switchAuthTab('register')">
+                            <i class="fas fa-user-plus"></i> Register
+                        </button>
+                    </div>
+
+                    <!-- Login View -->
+                    <div id="login-view" style="max-width: 450px; margin: 0 auto;">
+                        <div style="text-align: center; margin-bottom: 40px;">
+                            <div style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--gold); margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-user-graduate" style="font-size: 2rem; color: var(--gold);"></i>
+                            </div>
+                            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--gold); margin-bottom: 10px;">Welcome Back</h3>
+                            <p style="font-size: 0.85rem; opacity: 0.6;">Enter your credentials to access your portal</p>
+                        </div>
                         <div class="form-group">
-                            <input type="text" id="login-id" required placeholder=" ">
-                            <label>STUDENT ID (BWU-BCC-25-XXX)</label>
+                            <input type="text" id="login-id" required placeholder=" " autocomplete="off">
+                            <label><i class="fas fa-id-badge" style="margin-right: 8px; opacity: 0.5;"></i>STUDENT ID (BWU-BCC-25-XXX)</label>
                         </div>
                         <div class="form-group">
                             <input type="password" id="login-pass" required placeholder=" ">
-                            <label>PASSWORD</label>
+                            <label><i class="fas fa-lock" style="margin-right: 8px; opacity: 0.5;"></i>PASSWORD</label>
                         </div>
-                        <button class="btn-luxury" id="login-btn">Login</button>
-                        <p style="margin-top: 30px; font-size: 0.8rem; opacity: 0.6;">
-                            No Account? <span id="show-register" style="color: var(--gold); cursor: pointer; text-decoration: underline;">Create New Account</span>
+                        <button class="btn-luxury" id="login-btn" style="width: 100%; margin-top: 10px;">
+                            <i class="fas fa-sign-in-alt" style="margin-right: 10px;"></i>Login
+                        </button>
+                        <p style="margin-top: 30px; font-size: 0.85rem; opacity: 0.6; text-align: center;">
+                            No Account? <span id="show-register" class="link-text" onclick="switchAuthTab('register')">Create New Account</span>
                         </p>
                     </div>
 
-                    <div id="register-view" style="display: none;">
-                        <h3 style="font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); margin-bottom: 30px;">Register New Account</h3>
-                        <div class="form-group">
-                            <input type="text" id="reg-name" required placeholder=" ">
-                            <label>FULL NAME</label>
+                    <!-- Register View -->
+                    <div id="register-view" style="display: none; max-width: 450px; margin: 0 auto;">
+                        <div style="text-align: center; margin-bottom: 40px;">
+                            <div style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--gold); margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-user-plus" style="font-size: 2rem; color: var(--gold);"></i>
+                            </div>
+                            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--gold); margin-bottom: 10px;">Join the Nexus</h3>
+                            <p style="font-size: 0.85rem; opacity: 0.6;">Create your student account</p>
                         </div>
                         <div class="form-group">
-                            <input type="text" id="reg-id" required placeholder=" ">
-                            <label>STUDENT ID (BWU-BCC-25-XXX)</label>
+                            <input type="text" id="reg-name" required placeholder=" " autocomplete="off">
+                            <label><i class="fas fa-user" style="margin-right: 8px; opacity: 0.5;"></i>FULL NAME</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="reg-id" required placeholder=" " autocomplete="off">
+                            <label><i class="fas fa-id-badge" style="margin-right: 8px; opacity: 0.5;"></i>STUDENT ID (BWU-BCC-25-XXX)</label>
                         </div>
                         <div class="form-group">
                             <input type="password" id="reg-pass" required placeholder=" ">
-                            <label>PASSWORD</label>
+                            <label><i class="fas fa-lock" style="margin-right: 8px; opacity: 0.5;"></i>PASSWORD</label>
                         </div>
-                        <button class="btn-luxury" id="register-btn">Register</button>
-                        <p style="margin-top: 30px; font-size: 0.8rem; opacity: 0.6;">
-                            Already Have an Account? <span id="show-login" style="color: var(--gold); cursor: pointer; text-decoration: underline;">Login Here</span>
+                        <div style="margin-bottom: 30px;">
+                            <label style="color: var(--gold); font-size: 0.7rem; letter-spacing: 2px; margin-bottom: 12px; display: block;"><i class="fas fa-graduation-cap" style="margin-right: 8px;"></i>STUDENT STATUS</label>
+                            <select id="reg-status" style="width: 100%; background: transparent; color: var(--ivory); border: 1px solid rgba(197, 160, 89, 0.3); padding: 15px; border-radius: 12px; font-family: 'Inter', sans-serif;">
+                                <option value="new" style="background: var(--navy-light);">New Admission</option>
+                                <option value="old" style="background: var(--navy-light);">Existing Student</option>
+                            </select>
+                        </div>
+                        <button class="btn-luxury" id="register-btn" style="width: 100%; margin-top: 10px;">
+                            <i class="fas fa-user-plus" style="margin-right: 10px;"></i>Register Account
+                        </button>
+                        <p style="margin-top: 30px; font-size: 0.85rem; opacity: 0.6; text-align: center;">
+                            Already Have an Account? <span id="show-login" class="link-text" onclick="switchAuthTab('login')">Login Here</span>
                         </p>
                     </div>
-                </div>
-
-                <!-- Start Screen (Hidden initially) -->
-                <div id="exam-start" style="display: none;">
-                    <p style="margin-bottom: 30px; color: var(--gold-light); font-size: 1.2rem;">
-                        Welcome to the official Exam Center. Please read the instructions carefully before starting.
-                    </p>
-                    <div style="background: rgba(197, 160, 89, 0.05); padding: 30px; border-radius: 20px; border-left: 4px solid var(--gold); margin-bottom: 40px;">
-                        <ul style="list-style: none; color: var(--ivory); opacity: 0.8;">
-                            <li>• 40 Questions total</li>
-                            <li>• 20 Minutes time limit</li>
-                            <li>• Final score shown instantly</li>
-                        </ul>
-                    </div>
-                    <button class="btn-luxury" id="start-exam-btn">Start Exam</button>
                 </div>
 
                 <!-- Quiz Screen -->
                 <div id="exam-quiz" style="display: none;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
-                        <span id="question-count" style="color: var(--gold); font-weight: 600; letter-spacing: 2px;">QUESTION 1 / 40</span>
+                        <span id="question-count" style="color: var(--gold); font-weight: 600; letter-spacing: 2px;">QUESTION 1</span>
                         <span id="exam-timer">20:00</span>
                     </div>
-                    <div id="question-text" style="font-size: 1.8rem; margin-bottom: 40px; font-family: 'Playfair Display', serif; color: var(--ivory);">
-                        <!-- Question injected here -->
-                    </div>
-                    <div id="options-container">
-                        <!-- Options injected here -->
-                    </div>
+                    <div id="question-text" style="font-size: 1.8rem; margin-bottom: 40px; font-family: 'Playfair Display', serif; color: var(--ivory);"></div>
+                    <div id="options-container"></div>
                     <div style="margin-top: 50px; display: flex; justify-content: space-between; border-top: 1px solid rgba(197, 160, 89, 0.1); padding-top: 30px;">
                         <button class="btn-luxury" style="padding: 15px 40px; font-size: 0.7rem;" id="prev-btn">Previous</button>
                         <button class="btn-luxury" style="padding: 15px 40px; font-size: 0.7rem;" id="next-btn">Next</button>
@@ -309,14 +498,9 @@
                 <div id="exam-result" style="display: none; text-align: center;">
                     <div class="section-num" style="position: relative; top: 0; right: 0; font-size: 4rem; margin-bottom: 20px;">RESULT</div>
                     <h3 id="result-title" style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--gold); margin-bottom: 10px;">Exam Completed</h3>
-                    <p id="score-display" style="font-size: 3rem; color: var(--ivory); font-weight: 700; margin-bottom: 40px;">0 / 40</p>
-                    <p id="result-feedback" style="max-width: 500px; margin: 0 auto 40px; color: var(--gold-light); opacity: 0.8;">
-                        Your results have been recorded in the database.
-                    </p>
-                    <div style="display: flex; gap: 20px; justify-content: center;">
-                        <button class="btn-luxury" id="retry-exam-btn">Try Again</button>
-                        <a href="index.html" class="btn-luxury" style="background: transparent; border: 1px solid var(--gold); color: var(--gold);">Home</a>
-                    </div>
+                    <p id="score-display" style="font-size: 3rem; color: var(--ivory); font-weight: 700; margin-bottom: 40px;">0 / 10</p>
+                    <p id="result-feedback" style="max-width: 500px; margin: 0 auto 40px; color: var(--gold-light); opacity: 0.8;"></p>
+                    <button class="btn-luxury" onclick="window.location.href='dashboard.html'">Dashboard</button>
                 </div>
             </div>
         </section>
@@ -328,307 +512,145 @@
     </footer>
 
     <script>
+        // Exam Data
+        const examData = [
+            { q: "What defines the 'Art of Styling'?", o: ["Atomic control", "Global only", "Random", "None"], a: 0 },
+            { q: "Which cycle is for Cyber Arch.?", o: ["MARS", "SATURN", "LUNA", "JUPITER"], a: 2 },
+            { q: "Experiment No. 12 focus?", o: ["Physics", "Data Intel", "HTML", "Analog"], a: 1 },
+            { q: "HTTPS default port?", o: ["443", "80", "21", "8080"], a: 0 }
+        ];
+
+        let currentQuestion = 0;
+        let userAnswers = new Array(examData.length).fill(null);
+        let timeLeft = 1200;
+        let examTimer = null;
+
+        const quizScreen = document.getElementById('exam-quiz');
+        const resultScreen = document.getElementById('exam-result');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+        function updateExamUI() {
+            const q = examData[currentQuestion];
+            document.getElementById('question-count').innerText = `Question ${currentQuestion + 1} / ${examData.length}`;
+            document.getElementById('question-text').innerText = q.q;
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+            q.o.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = `option-btn ${userAnswers[currentQuestion] === idx ? 'selected' : ''}`;
+                btn.innerText = opt;
+                btn.onclick = () => { userAnswers[currentQuestion] = idx; updateExamUI(); };
+                container.appendChild(btn);
+            });
+            prevBtn.style.visibility = currentQuestion === 0 ? 'hidden' : 'visible';
+            nextBtn.innerText = currentQuestion === examData.length - 1 ? 'FINALIZE' : 'NEXT';
+        }
+
+        function startTimer() {
+            examTimer = setInterval(() => {
+                timeLeft--;
+                const mins = Math.floor(timeLeft / 60);
+                const secs = timeLeft % 60;
+                document.getElementById('exam-timer').innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+                if (timeLeft <= 0) finalizeExam();
+            }, 1000);
+        }
+
+        function finalizeExam() {
+            clearInterval(examTimer);
+            quizScreen.style.display = 'none';
+            resultScreen.style.display = 'block';
+            let score = 0;
+            userAnswers.forEach((ans, idx) => { if (ans === examData[idx].a) score++; });
+            document.getElementById('score-display').innerText = `${score} / ${examData.length}`;
+            document.getElementById('result-feedback').innerText = score >= 2 ? "PASSED" : "FAILED";
+        }
+
+        prevBtn.onclick = () => { if (currentQuestion > 0) { currentQuestion--; updateExamUI(); } };
+        nextBtn.onclick = () => { if (currentQuestion < examData.length - 1) { currentQuestion++; updateExamUI(); } else { finalizeExam(); } };
+
+        function logout() {
+            sessionStorage.removeItem('nexus_session');
+            window.location.reload();
+        }
+
+        function switchAuthTab(tab) {
+            const loginView = document.getElementById('login-view');
+            const registerView = document.getElementById('register-view');
+            const tabLogin = document.getElementById('tab-login');
+            const tabRegister = document.getElementById('tab-register');
+            
+            if (tab === 'login') {
+                loginView.style.display = 'block';
+                registerView.style.display = 'none';
+                tabLogin.classList.add('active');
+                tabRegister.classList.remove('active');
+            } else {
+                loginView.style.display = 'none';
+                registerView.style.display = 'block';
+                tabLogin.classList.remove('active');
+                tabRegister.classList.add('active');
+            }
+        }
+
+        // Initialization
         document.addEventListener('DOMContentLoaded', () => {
-            // 0. Luxury Preloader
             window.onload = () => {
                 const loader = document.getElementById('preloader');
-                if (loader) {
-                    loader.style.opacity = '0';
-                    setTimeout(() => loader.style.display = 'none', 1000);
-                }
+                if (loader) { loader.style.opacity = '0'; setTimeout(() => loader.style.display = 'none', 1000); }
             };
 
-            // 1. Premium Custom Cursor
             const cursor = document.getElementById('cursor');
             const follower = document.getElementById('cursor-follower');
-            
             document.addEventListener('mousemove', (e) => {
                 cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
                 follower.style.transform = `translate3d(${e.clientX - 16}px, ${e.clientY - 16}px, 0)`;
             });
 
-            // 2. Auth & Navigation Logic
-            const authSection = document.getElementById('exam-auth');
-            const loginView = document.getElementById('login-view');
-            const registerView = document.getElementById('register-view');
-            const examStart = document.getElementById('exam-start');
-            
-            const showRegister = document.getElementById('show-register');
-            const showLogin = document.getElementById('show-login');
-
-            // Dynamic Page Title & Mode Logic
-            const urlParams = new URLSearchParams(window.location.search);
-            const isAuthMode = urlParams.get('mode') === 'auth';
-            const userSession = JSON.parse(sessionStorage.getItem('nexus_session'));
-            
-            const pageTitle = document.getElementById('page-title');
-            const pageIcon = document.getElementById('page-icon');
-            const pageSecNum = document.getElementById('page-section-num');
-
-            if (userSession) {
-                // Logged in: Always show Student Profile/Center
-                pageTitle.innerText = "Student Hub";
-                pageIcon.className = "fas fa-user-shield";
-                pageSecNum.innerText = "NEXUS";
-                
-                authSection.style.display = 'none';
-                examStart.style.display = 'block';
-                document.getElementById('user-profile').style.display = 'inline-block';
-                document.getElementById('user-name-display').innerText = userSession.name.split(' ')[0].toUpperCase();
-            } else if (isAuthMode) {
-                // Coming from "LOGIN" on Home page
-                pageTitle.innerText = "Student Login";
-                pageIcon.className = "fas fa-sign-in-alt";
-                pageSecNum.innerText = "AUTH";
-            } else {
-                // Coming from "Exam Center" navigation
-                pageTitle.innerText = "Exam Center";
-                pageIcon.className = "fas fa-graduation-cap";
-                pageSecNum.innerText = "CENTER";
+            const session = JSON.parse(sessionStorage.getItem('nexus_session'));
+            if (session) {
+                window.location.href = 'dashboard.html';
             }
 
-            document.getElementById('logout-btn').onclick = (e) => {
-                e.preventDefault();
-                sessionStorage.removeItem('nexus_session');
-                window.location.reload();
-            };
-            
-            showRegister.onclick = () => {
-                loginView.style.opacity = '0';
-                setTimeout(() => {
-                    loginView.style.display = 'none';
-                    registerView.style.display = 'block';
-                    registerView.style.opacity = '1';
-                }, 300);
-            };
-            
-            showLogin.onclick = () => {
-                registerView.style.opacity = '0';
-                setTimeout(() => {
-                    registerView.style.display = 'none';
-                    loginView.style.display = 'block';
-                    loginView.style.opacity = '1';
-                }, 300);
-            };
+            // Auth Tab Switching
+            document.getElementById('show-register').onclick = () => switchAuthTab('register');
+            document.getElementById('show-login').onclick = () => switchAuthTab('login');
 
-            // Security Validation: Enforce BWU-BCC-25-XXX format
-            function isValidStudentID(id) {
-                return /^BWU-BCC-25-\d{3}$/i.test(id);
-            }
-
-            // Register Logic
             document.getElementById('register-btn').onclick = () => {
-                const name = document.getElementById('reg-name').value.trim();
-                const studentID = document.getElementById('reg-id').value.trim().toUpperCase();
+                const name = document.getElementById('reg-name').value;
+                const studentID = document.getElementById('reg-id').value.toUpperCase();
                 const pass = document.getElementById('reg-pass').value;
-
                 if (!name || !studentID || !pass) {
-                    alert('All identity parameters are required.');
+                    alert('Please fill in all fields.');
                     return;
                 }
-                if (!isValidStudentID(studentID)) {
-                    alert('Invalid Student ID format. Use BWU-BCC-25-XXX (e.g., BWU-BCC-25-006)');
-                    return;
-                }
-                if (pass.length < 6) {
-                    alert('Password must be at least 6 characters.');
-                    return;
-                }
-
                 const users = JSON.parse(localStorage.getItem('nexus_users') || '[]');
                 if (users.find(u => u.studentID === studentID)) {
                     alert('This Student ID is already registered.');
                     return;
                 }
-
                 users.push({ name, studentID, pass });
                 localStorage.setItem('nexus_users', JSON.stringify(users));
-                alert('Account Created. Please Login.');
-                showLogin.click();
+                alert('Registration successful! Please login.');
+                switchAuthTab('login');
             };
-
-            // Login Logic
-            const loginIdInput = document.getElementById('login-id');
-            const loginPassInput = document.getElementById('login-pass');
-            
-            const triggerLogin = (e) => { if (e.key === 'Enter') document.getElementById('login-btn').click(); };
-            loginIdInput.addEventListener('keypress', triggerLogin);
-            loginPassInput.addEventListener('keypress', triggerLogin);
 
             document.getElementById('login-btn').onclick = () => {
-                const studentID = loginIdInput.value.trim().toUpperCase();
-                const pass = loginPassInput.value;
-
+                const id = document.getElementById('login-id').value.toUpperCase();
+                const pass = document.getElementById('login-pass').value;
+                if (!id || !pass) {
+                    alert('Please enter your Student ID and Password.');
+                    return;
+                }
                 const users = JSON.parse(localStorage.getItem('nexus_users') || '[]');
-                const user = users.find(u => u.studentID === studentID && u.pass === pass);
-
-                if (user) {
-                    sessionStorage.setItem('nexus_session', JSON.stringify(user));
-                    window.location.reload(); // Reload to activate profile view
+                const user = users.find(u => u.studentID === id && u.pass === pass);
+                if (user) { 
+                    sessionStorage.setItem('nexus_session', JSON.stringify(user)); 
+                    window.location.href = 'dashboard.html'; 
                 } else {
-                    alert('Login failed. Check your ID and Password.');
+                    alert('Invalid credentials. Please try again.');
                 }
-            };
-
-            // Register Enter Key Support
-            const regInputs = ['reg-name', 'reg-id', 'reg-pass'];
-            regInputs.forEach(id => {
-                document.getElementById(id).addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') document.getElementById('register-btn').click();
-                });
-            });
-
-            // 3. Nexus Exam Portal Logic
-            const examData = [
-                { q: "What defines the 'Art of Styling' in the Nexus methodology?", o: ["Atomic control over elements", "Global styling only", "Random color application", "Standardization without design"], a: 0 },
-                { q: "In the Academic Matrix, which cycle is dedicated to Cyber Arch.?", o: ["MARS", "SATURN", "LUNA", "JUPITER"], a: 2 },
-                { q: "What is the primary focus of Experiment No. 12?", o: ["Quantum Physics", "Modern Data Intelligence", "Basic HTML", "Analog Electronics"], a: 1 },
-                { q: "The Luxury Navigation bar utilizes which CSS property for its background effect?", o: ["Opacity 0.5", "Backdrop-filter: blur()", "Filter: grayscale()", "Display: none"], a: 1 },
-                { q: "The Department of CSE at BWU specializes in which field alongside Cyber Security?", o: ["Art & Design", "Mechanical Systems", "Data Science", "Ancient History"], a: 2 },
-                { q: "Which HTTP status code represents a successful resource creation?", o: ["200 OK", "201 Created", "204 No Content", "400 Bad Request"], a: 1 },
-                { q: "What is the primary purpose of a 'Symmetric Key' in cryptography?", o: ["Public distribution", "Different keys for enc/dec", "Same key for enc/dec", "Hardware identification"], a: 2 },
-                { q: "In CSS, what does the 'z-index' property control?", o: ["Element width", "Stacking order", "Zoom level", "Text alignment"], a: 1 },
-                { q: "Which protocol is used for secure shell access to a remote server?", o: ["FTP", "HTTP", "SSH", "SMTP"], a: 2 },
-                { q: "What is the default port for HTTPS traffic?", o: ["80", "21", "443", "8080"], a: 2 },
-                { q: "Which data structure operates on a 'Last-In, First-Out' (LIFO) principle?", o: ["Queue", "Array", "Stack", "Linked List"], a: 2 },
-                { q: "What does SQL stand for?", o: ["Simple Query Language", "Structured Query Language", "System Query Level", "Standard Quick Link"], a: 1 },
-                { q: "In the context of Cyber Security, what does 'MFA' stand for?", o: ["Multi-Function Access", "Master File Archive", "Multi-Factor Authentication", "Managed Firewall Array"], a: 2 },
-                { q: "Which JavaScript keyword is used to declare a block-scoped variable?", o: ["var", "let", "global", "define"], a: 1 },
-                { q: "What is the main function of a DNS server?", o: ["Data Storage", "Domain Name Resolution", "Digital Network Security", "Dynamic Node Selection"], a: 1 },
-                { q: "Which layer of the OSI model is responsible for routing?", o: ["Data Link", "Transport", "Network", "Session"], a: 2 },
-                { q: "What is a 'Zero-Day' vulnerability?", o: ["A bug fixed in 0 days", "A known exploit", "A previously unknown vulnerability", "A low-risk error"], a: 2 },
-                { q: "In React, which hook is used for managing side effects?", o: ["useState", "useContext", "useEffect", "useMemo"], a: 2 },
-                { q: "What is the primary purpose of a Web Application Firewall (WAF)?", o: ["Filter HTTP traffic", "Speed up internet", "Store passwords", "Manage CSS"], a: 0 },
-                { q: "Which company developed the Java programming language?", o: ["Microsoft", "Sun Microsystems", "Apple", "Google"], a: 1 },
-                { q: "What does 'API' stand for?", o: ["Advanced Program Integration", "Application Programming Interface", "Automated Path Index", "Access Point Intelligence"], a: 1 },
-                { q: "Which sorting algorithm has the best average-case time complexity?", o: ["Bubble Sort", "Insertion Sort", "Quick Sort", "Selection Sort"], a: 2 },
-                { q: "In Python, which function is used to get the length of a list?", o: ["size()", "length()", "len()", "count()"], a: 2 },
-                { q: "What is the purpose of 'Docker' in software development?", o: ["Image editing", "Containerization", "Database management", "Email hosting"], a: 1 },
-                { q: "Which symbol is used for comments in Python?", o: ["//", "/*", "#", "--"], a: 2 },
-                { q: "What is the 'root' directory in a Linux system?", o: ["/home", "/root", "/", "/bin"], a: 2 },
-                { q: "Which CSS unit is relative to the font-size of the root element?", o: ["px", "em", "rem", "%"], a: 2 },
-                { q: "What is a 'Phishing' attack?", o: ["Network overloading", "Deceptive communication", "Hardware theft", "Password guessing"], a: 1 },
-                { q: "In Git, which command is used to save changes locally?", o: ["git push", "git pull", "git commit", "git fetch"], a: 2 },
-                { q: "What does 'JSON' stand for?", o: ["Java System Object Notation", "JavaScript Object Notation", "Junction Socket Object Network", "Just Standard Object Node"], a: 1 },
-                { q: "Which protocol is used to send emails?", o: ["POP3", "IMAP", "SMTP", "HTTP"], a: 2 },
-                { q: "What is the primary benefit of 'Cloud Computing'?", o: ["No internet needed", "Scalability", "Fixed hardware", "Local storage only"], a: 1 },
-                { q: "In HTML, which tag is used for the largest heading?", o: ["<head>", "<h6>", "<h1>", "<header>"], a: 2 },
-                { q: "What is 'Encapsulation' in Object-Oriented Programming?", o: ["Inheriting traits", "Hiding internal data", "Multiple forms", "Connecting to APIs"], a: 1 },
-                { q: "Which port is used by the SSH protocol by default?", o: ["21", "22", "23", "25"], a: 1 },
-                { q: "What is the purpose of a 'Proxy Server'?", o: ["Acting as an intermediary", "Database backup", "Styling websites", "Compiling code"], a: 0 },
-                { q: "Which language is primarily used for Android App Development?", o: ["Swift", "Kotlin", "Ruby", "PHP"], a: 1 },
-                { q: "What is the 'Main' method in C++?", o: ["Entry point of program", "A reserved class", "Optional function", "Memory allocator"], a: 0 },
-                { q: "What does 'URL' stand for?", o: ["Universal Resource Locator", "Uniform Resource Locator", "Unified Remote Link", "User Response Level"], a: 1 },
-                { q: "Which tool is used to inspect network traffic?", o: ["Postman", "Wireshark", "VS Code", "GitHub"], a: 1 }
-            ];
-
-            let currentQuestion = 0;
-            let userAnswers = new Array(examData.length).fill(null);
-            let examTimer = null;
-            let timeLeft = 1200; // 20 minutes
-
-            const startBtn = document.getElementById('start-exam-btn');
-            const quizScreen = document.getElementById('exam-quiz');
-            const startScreen = document.getElementById('exam-start');
-            const resultScreen = document.getElementById('exam-result');
-            const prevBtn = document.getElementById('prev-btn');
-            const nextBtn = document.getElementById('next-btn');
-
-            function updateExamUI() {
-                const question = examData[currentQuestion];
-                document.getElementById('question-count').innerText = `SEC 01 / Q ${currentQuestion + 1}`;
-                document.getElementById('question-text').innerText = question.q;
-                
-                const optionsContainer = document.getElementById('options-container');
-                optionsContainer.innerHTML = '';
-                
-                question.o.forEach((opt, idx) => {
-                    const btn = document.createElement('button');
-                    btn.className = `option-btn ${userAnswers[currentQuestion] === idx ? 'selected' : ''}`;
-                    btn.innerText = opt;
-                    btn.onclick = () => selectOption(idx);
-                    optionsContainer.appendChild(btn);
-                });
-
-                prevBtn.style.visibility = currentQuestion === 0 ? 'hidden' : 'visible';
-                nextBtn.innerText = currentQuestion === examData.length - 1 ? 'FINALIZE' : 'ADVANCE';
-            }
-
-            function selectOption(idx) {
-                userAnswers[currentQuestion] = idx;
-                updateExamUI();
-            }
-
-            function startTimer() {
-                examTimer = setInterval(() => {
-                    timeLeft--;
-                    const mins = Math.floor(timeLeft / 60);
-                    const secs = timeLeft % 60;
-                    document.getElementById('exam-timer').innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-                    
-                    if (timeLeft <= 0) {
-                        clearInterval(examTimer);
-                        finalizeExam();
-                    }
-                }, 1000);
-            }
-
-            function finalizeExam() {
-                clearInterval(examTimer);
-                quizScreen.style.display = 'none';
-                resultScreen.style.display = 'block';
-                
-                const session = JSON.parse(sessionStorage.getItem('nexus_session') || '{}');
-                const userName = session.name || 'Operative';
-
-                let score = 0;
-                userAnswers.forEach((ans, idx) => {
-                    if (ans === examData[idx].a) score++;
-                });
-                
-                const percentage = (score / examData.length) * 100;
-                document.getElementById('score-display').innerText = `${score} / ${examData.length}`;
-                
-                const feedback = document.getElementById('result-feedback');
-                if (percentage >= 80) feedback.innerText = `Exceptional work, ${userName}. You achieved ${percentage}%. Your intelligence profile is elite.`;
-                else if (percentage >= 50) feedback.innerText = `Competent, ${userName}. You achieved ${percentage}%. Your Nexus standing is validated.`;
-                else feedback.innerText = `Standard standing, ${userName}. You achieved ${percentage}%. Further calibration is required within the Laboratory.`;
-            }
-
-            startBtn.onclick = () => {
-                startScreen.style.display = 'none';
-                quizScreen.style.display = 'block';
-                // Reset timer and score just in case
-                timeLeft = 1200;
-                userAnswers.fill(null);
-                currentQuestion = 0;
-                startTimer();
-                updateExamUI();
-            };
-
-            prevBtn.onclick = () => {
-                if (currentQuestion > 0) {
-                    currentQuestion--;
-                    updateExamUI();
-                }
-            };
-
-            nextBtn.onclick = () => {
-                if (currentQuestion < examData.length - 1) {
-                    currentQuestion++;
-                    updateExamUI();
-                } else {
-                    finalizeExam();
-                }
-            };
-
-            document.getElementById('retry-exam-btn').onclick = () => {
-                currentQuestion = 0;
-                userAnswers.fill(null);
-                timeLeft = 300;
-                resultScreen.style.display = 'none';
-                startScreen.style.display = 'block';
-                document.getElementById('exam-timer').innerText = "05:00";
             };
         });
     </script>
